@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hubei University of Economics</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="./gpa.css">
+</head>
+
+<body style="position: relative;height: 100vh">
+  <!-- 标题 -->
+  <div class="header">
+    <div class="logo">
+      <img src="./img/logo.jpg" alt="">
+    </div>
+    <div class="title">Hubei University of Economics</div>
+    <div class="search">
+      <input type="text" placeholder="Press Enter Search" id="search">
+    </div>
+  </div>
+  <!--导航栏-->
+  <div class="nav">
+    <div class="navhead">
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li class="fg"></li>
+        <li class="xx"><a href="./ComputerScience.html">Computer science program description</a>
+        </li>
+        <li class="fg"></li>
+        <li class="zz"><a href="./Application.html">Teaching Assistant Application</a>
+        </li>
+        <li class="fg"></li>
+        <li class="yx"><a href="./GPA.html">GPA calculate</a>
+
+        </li>
+        <li class="fg"></li>
+        <!-- <li>baidu</li>
+                <li class="fg"></li> -->
+
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 内容 -->
+  <div class="content">
+    <div class="gpa">
+      <img src="./img/GPA.png" alt="">
+    </div>
+    <form name="input" action="#" method="get" class="form">
+      <div class="layui-form-item">
+        <label class="layui-form-label">credit hours：</label>
+        <div class="layui-input-block" id="hours">
+          <input type="text" name="hours" class="hours">
+          <input type="text" name="hours" class="hours">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"> letter grade：</label>
+        <div class="layui-input-block" id="grades">
+          <input type="text" name="grade" class="grades">
+          <input type="text" name="grade" class="grades">
+        </div>
+      </div>
+      <div class="add">+</div>
+      <input type="submit" value="Calculate" class="submit">
+    </form>
+  </div>
+  <!--网页尾部-->
+
+  <div style="padding-bottom:0px;position: absolute;bottom: 0; overflow: hidden;width: 100%;" class="footer">
+    <div style="float:left;width: 32%;height: 96px;margin-top: 15px;margin-left: 20px;padding-left: 0px;">
+      <a href=""></a>
+    </div>
+    <div style="float:left;">
+
+      Copyright 2020 Hubei Institute of Economics XXX Copyright © 2020 XXX.ALL Rights Reserved<br>
+    </div>
+
+  </div>
+</body>
+<script src="./jquery-3.5.1.min.js"></script>
+<script>
+  $(function () {
+    $(".add").click(function () {
+      $("#hours").append('<input type="text" name="hours" class="hours">');
+      $("#grades").append('<input type="text" name="grade" class="grades">');
+    });
+    $("form").on("submit",function (event) {
+      event = event || window.event;
+      event.preventDefault();
+      var grades = [];
+      var hours = [];
+      var nograde = false;
+      var nohour = false;
+      $(".grades").each((index, item, arr) => {
+        if ($(item).val() == "") {
+          nograde = true;
+        }
+        grades[index] = parseFloat($(item).val());
+      });
+      $(".hours").each((index, item, arr) => {
+        if ($(item).val() == "") {
+          nohour = true
+        }
+        hours[index] = parseFloat($(item).val());
+      });
+      if (nograde || nohour) {
+        alert("Please check if the form is completed！");
+        return 0;
+      }
+      //计算GPA
+      var sum1 = 0;
+      var sum2 = 0;
+      grades.forEach((item, index, arr) => {
+        sum1 += item * hours[index];
+        sum2 += hours[index];
+      });
+      var GPA = sum1 / sum2;
+      alert("After calculation, your GPA is "+GPA);
+    });
+  });
+</script>
+
+</html>
